@@ -7,8 +7,15 @@ window.onload = function(e)
         attributionControl: false
     });
     map.addControl(new MapboxGeocoder({accessToken: mapboxgl.accessToken }), 'bottom-right');
-    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
-
+    
+    map.on('load', function()
+    {
+        //add shoreLine 
+        for (var i=0 ;i<shoreLineConfig.length;i++)
+        {
+            map.addLayer(shoreLineConfig[i]);
+        }
+    })
 
     var modes = MapboxDraw.modes;
     modes.draw_rectangle = DrawRectangle.default;
@@ -39,6 +46,8 @@ window.onload = function(e)
     {
         menuElem.classList.remove('visible');
     });
+    
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     
     AddMouseMoveFadeEvent(document.getElementsByClassName("mapboxgl-control-container")[0]);
 }
