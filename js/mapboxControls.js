@@ -32,12 +32,17 @@ class DrawRectangleCtrl {
 }
 
 //create custom hamburger menu control
-class HamburgerButtonCtrl {
+class ToggleElementButtonCtrl {
+    constructor(el, className){
+    this.element = el;
+    this.className = (className) ? className : "";
+  }
+    
   onAdd(map){
     this.map = map;
     this.container = document.createElement('div');
-    this.container.className = "draw_rectangle-control mapboxgl-ctrl";
-    const button = this._createButton('draw_rectangle')
+    this.container.className = "toggle_element-control mapboxgl-ctrl ";
+    const button = this._createButton('toggle_element '+this.className);
     this.container.appendChild(button);
     return this.container;
   }
@@ -48,15 +53,20 @@ class HamburgerButtonCtrl {
   }
 
   _createButton(className) {
-    const el = window.document.createElement('button')
+    const el = window.document.createElement('div')
     el.className = className;
-    el.textContent = 'Select';
     el.addEventListener('click', (e) => {
         console.log(e);
-        draw.deleteAll();
-        draw.changeMode('draw_rectangle');
-      // e.preventDefault()
-      e.stopPropagation()
+        if (this.element.classList.contains("visible"))
+        {
+            this.element.classList.remove("visible");
+        }
+        else
+        {
+            this.element.classList.add("visible");
+        }
+      // e.preventDefault();
+      e.stopPropagation();
     }, false)
     return el;
   }

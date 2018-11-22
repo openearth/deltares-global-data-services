@@ -26,27 +26,37 @@ window.onload = function(e)
         });
     });
 
-    const DrawRectangleControl = new DrawRectangleCtrl(draw);
-    map.addControl(DrawRectangleControl, 'bottom-right');
+    const drawRectangleControl = new DrawRectangleCtrl(draw);
+    map.addControl(drawRectangleControl, 'bottom-right');
 
-    const LoginCtrl = new LoginCtrl();
-    map.addControl(LoginCtrl, 'top-right');
+    const loginControl = new LoginCtrl();
+    map.addControl(loginControl, 'top-right');
     
-    AddMouseMoveFadeEvent();
+    var menuElem = document.getElementById("menu-left");
+    const hamburgerMenuControl = new ToggleElementButtonCtrl(menuElem, "hamburger-menu-toggle");
+    map.addControl(hamburgerMenuControl, 'top-left');
+    document.getElementById("icon-menu-close").addEventListener("click", function(e) 
+    {
+        menuElem.classList.remove('visible');
+    });
+    
+    AddMouseMoveFadeEvent(document.getElementsByClassName("mapboxgl-control-container")[0]);
 }
 
 //add fadein on mousemove
-function AddMouseMoveFadeEvent()
+function AddMouseMoveFadeEvent(elementToFade)
 {
+    var mouseTimer;
     document.getElementById("map").addEventListener("mouseover", function() 
     {
-        var controls = document.getElementsByClassName("mapboxgl-control-container");
-        for(var i=0; i<controls.length; i++)
-        {
-            controls[i].classList.add("visible");
-        }
-
-    }, {once : true});
+            clearTimeout(mouseTimer);
+            elementToFade.classList.add("visible");
+           
+            mouseTimer = setTimeout( function() 
+            {
+               elementToFade.classList.remove("visible"); 
+            }, 5000);
+    });
 }
 
 function getBoundingBox(data) {
