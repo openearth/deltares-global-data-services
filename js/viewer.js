@@ -10,32 +10,32 @@ window.onload = function(e)
     
     map.on('load', function()
     {
-        //add shoreLine 
-        for (var i=0 ;i<shoreLineConfig.length;i++)
-        {
-            map.addLayer(shoreLineConfig[i]);
-        }
-    })
+        const layerControl = new LayerMenuCtrl();
+        map.addControl(layerControl, "top-right");
+        layerControl.addLayer('Shoreline', shoreLineConfig);
+        layerControl.addLayer('Glossis', glossisConfig);
 
-    var modes = MapboxDraw.modes;
-    modes.draw_rectangle = DrawRectangle.default;
+        var modes = MapboxDraw.modes;
+        modes.draw_rectangle = DrawRectangle.default;
 
-    var draw = new MapboxDraw({
-        modes: modes,
-        displayControlsDefault: false,
-    });
-    map.addControl(draw);
-
-    map.on('draw.create', function (layer) {
-        var bounds = getBoundingBox(layer);
-        map.fitBounds(bounds, {
-          padding: {top: 30, bottom:30, left: 30, right: 30}
+        var draw = new MapboxDraw({
+            modes: modes,
+            displayControlsDefault: false,
         });
+        map.addControl(draw);
+
+        map.on('draw.create', function (layer) {
+            var bounds = getBoundingBox(layer);
+            map.fitBounds(bounds, {
+              padding: {top: 30, bottom:30, left: 30, right: 30}
+            });
+            layerControl.showList();
+        });
+
+        const drawRectangleControl = new DrawRectangleCtrl(draw);
+        map.addControl(drawRectangleControl, 'bottom-right');
     });
-
-    const drawRectangleControl = new DrawRectangleCtrl(draw);
-    map.addControl(drawRectangleControl, 'bottom-right');
-
+    
     const loginControl = new LoginCtrl();
     map.addControl(loginControl, 'top-right');
     
@@ -56,7 +56,7 @@ window.onload = function(e)
 function AddMouseMoveFadeEvent(elementToFade)
 {
     var mouseTimer;
-    document.getElementById("map").addEventListener("mouseover", function() 
+    document.body.addEventListener("mousemove", function() 
     {
             clearTimeout(mouseTimer);
             elementToFade.classList.add("visible");

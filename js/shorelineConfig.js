@@ -232,3 +232,15 @@ const shoreLineConfig = [
     }
   }
 ];
+
+const glossisConfig = [
+    {
+        id: "glossis-time0",
+        type: "heatmap",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.7dkn64d9"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_0_20-37nla3",
+    },
+]
