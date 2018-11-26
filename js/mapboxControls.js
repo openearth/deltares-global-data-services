@@ -205,7 +205,7 @@ class LayerMenuCtrl {
         listItem.appendChild(checkbox);
                 
         checkbox.addEventListener('change', (e) => {
-             console.log(e, checkbox.value);
+             //console.log(e, checkbox.value);
              if (checkbox.checked)
              {
                  this._showLayers(layerObject.layerList);

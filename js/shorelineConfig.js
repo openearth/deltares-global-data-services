@@ -149,9 +149,9 @@ const shoreLineConfig = [
         ["linear"],
         ["zoom"],
         0,
-        10,
+        6,
         22,
-        45
+        42
       ],
       "text-allow-overlap": true,
       "text-rotation-alignment": "map"
@@ -163,15 +163,84 @@ const shoreLineConfig = [
     'filter': ['==', 'Transect_id', '']
   },
   {
+    id: "shoreline-aggregated-glow-middle",
+    type: "circle",
+    source: {
+      type: "vector",
+      url: "mapbox://gerbenha.6z18bebw"
+    },
+    "minzoom": 4,
+    "maxzoom": 9,
+    "source-layer": "Aggregatedpointsz5-bsf5g2",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        2,
+        9,
+        18
+      ],
+      "circle-blur": 2,
+      "circle-color": "#ffffff"
+    }
+  },
+  {
+    id: "shoreline-aggregated-middle",
+    type: "circle",
+    source: {
+      type: "vector",
+      url: "mapbox://gerbenha.6z18bebw"
+    },
+    "minzoom": 4,
+    "maxzoom": 9,
+    "source-layer": "Aggregatedpointsz5-bsf5g2",
+    paint: {
+      "circle-radius" : [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        1,
+        9,
+        20
+      ],
+      "circle-color": [
+        "step",
+        ["get", "NormalizedValue"],
+        "#D7191C",
+        -0.6,
+        "#FDAE61",
+        -0.2,
+        "#FFFFBF",
+        0.2,
+        "#A6D96A",
+        0.6,
+        "#1A9641"
+      ],
+      "circle-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        0.28,
+        9,
+        1
+      ],
+      "circle-blur": 1,
+    }
+  },
+  {
     id: "shoreline-aggregated-glow",
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://camvdvries.cjkjybd4"
+      url: "mapbox://gerbenha.0palcbmn"
     },
     "minzoom": 0,
-    "maxzoom": 9,
-    "source-layer": "Aggregatedpoints-d2xahs",
+    "maxzoom": 4,
+    "source-layer": "Aggregatedpointsz0-0vqo71",
     paint: {
       "circle-radius": [
         "interpolate",
@@ -191,11 +260,11 @@ const shoreLineConfig = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://camvdvries.cjkjybd4"
+      url: "mapbox://gerbenha.0palcbmn"
     },
     "minzoom": 0,
-    "maxzoom": 9,
-    "source-layer": "Aggregatedpoints-d2xahs",
+    "maxzoom": 4,
+    "source-layer": "Aggregatedpointsz0-0vqo71",
     paint: {
       "circle-radius" : [
         "interpolate",
@@ -235,12 +304,102 @@ const shoreLineConfig = [
 
 const glossisConfig = [
     {
-        id: "glossis-time0",
-        type: "heatmap",
+        id: "glossis-time00",
+        type: "raster",
+        source: {
+          type: "raster",
+          url: "mapbox://gerbenha.47ka8d9y"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_0_20-0qgke6",
+    },
+     {
+        id: "glossis-time01",
+        type: "line",
         source: {
           type: "vector",
-          url: "mapbox://gerbenha.7dkn64d9"
+          url: "mapbox://gerbenha.azumqgwe"
         },
-        "source-layer": "DflowFM_gtsm_wl_timestep_0_20-37nla3",
+        "source-layer": "DflowFM_gtsm_wl_timestep_1_20-9t4tet",
+    },
+     {
+        id: "glossis-time02",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.8itrs04b"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_2_20-8we509",
+    },
+     {
+        id: "glossis-time03",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.6ovgqz7k"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_3_20-c7unm4",
+    },
+     {
+        id: "glossis-time04",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.bhr5y5yw"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_4_20-75go4a",
+    },
+     {
+        id: "glossis-time05",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.0ofx6kdm"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_5_20-6fwich",
+    },
+     {
+        id: "glossis-time06",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.9aau2iir"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_6_20-1v28sq",
+    },
+     {
+        id: "glossis-time07",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.4c0vshvl"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_7_20-3u5dbj",
+    },
+         {
+        id: "glossis-time08",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.dolr3xdo"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_8_20-4l6z2t",
+    },
+         {
+        id: "glossis-time09",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.1rfnjvb4"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_9_20-4vtohy",
+    },
+         {
+        id: "glossis-time10",
+        type: "line",
+        source: {
+          type: "vector",
+          url: "mapbox://gerbenha.6dc7yfx3"
+        },
+        "source-layer": "DflowFM_gtsm_wl_timestep_10_2-96fuya",
     },
 ]

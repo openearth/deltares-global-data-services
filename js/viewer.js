@@ -34,6 +34,8 @@ window.onload = function(e)
 
         const drawRectangleControl = new DrawRectangleCtrl(draw);
         map.addControl(drawRectangleControl, 'bottom-right');
+        
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     });
     
     const loginControl = new LoginCtrl();
@@ -46,8 +48,6 @@ window.onload = function(e)
     {
         menuElem.classList.remove('visible');
     });
-    
-    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     
     AddMouseMoveFadeEvent(document.getElementsByClassName("mapboxgl-control-container")[0]);
 }
