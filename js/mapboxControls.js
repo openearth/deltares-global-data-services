@@ -132,7 +132,7 @@ class LayerMenuCtrl {
             layerList: layersArray,
             visible:true,
         })
-        this._showLayers(layersArray);
+        this._addLayers(layersArray);
     }
     
     removeLayers(name)
@@ -141,7 +141,11 @@ class LayerMenuCtrl {
         {
             if (this.layername === name)
             {
-                this._hideLayers(this.maplayers.layersList);
+                for (var j=0 ;j<this.maplayers.layersList.length;j++)
+                {
+                    this.map.removeLayer(this.maplayers.layersList[j].id)
+                    this.map.removeSource(this.maplayers.layersList[j].id);
+                }
                 return this.maplayers.splice(i, 1);
             }
         }
@@ -150,15 +154,15 @@ class LayerMenuCtrl {
     
     _hideLayers(layersList)
     {
-        //add layers to map
         for (var i=0 ;i<layersList.length;i++)
         {
-            this.map.removeLayer(layersList[i].id)
-            this.map.removeSource(layersList[i].id);
+            this.map.setLayoutProperty(layersList[i].id, 'visibility', 'none');
+            //this.map.removeLayer(layersList[i].id)
+            //this.map.removeSource(layersList[i].id);
         }
     }
     
-    _showLayers(layersList)
+    _addLayers(layersList)
     {
          //add layers to map
         for (var i=0 ;i<layersList.length;i++)
@@ -167,25 +171,50 @@ class LayerMenuCtrl {
         }
     }
     
+    _showLayers(layersList)
+    {
+        for (var i=0 ;i<layersList.length;i++)
+        {
+            //this.map.addLayer(layersList[i]);
+            this.map.setLayoutProperty(layersList[i].id, 'visibility', 'visible');
+        }
+    }
+    
     _createButton() {
         const el = window.document.createElement('div')
         el.className = this.className;
         el.addEventListener('click', (e) => {
             //console.log(e);
-            this.showList();
+            this.toggleList();
           // e.preventDefault()
           e.stopPropagation()
         }, false)
         return el;
     }
     
-    showList()
+    hideList()
     {
         if(document.getElementsByClassName(this.className+"-list").length > 0)
         {
             document.getElementsByClassName(this.className+"-list")[0].remove();
         }
+    }
+    
+    toggleList()
+    {
+         if(document.getElementsByClassName(this.className+"-list").length > 0)
+         {
+             this.hideList()
+         }
         else
+        {
+            this.showList()
+        }
+    }
+    
+    showList()
+    {
+        if(document.getElementsByClassName(this.className+"-list").length <= 0)
         {
             var list = this._createList(this.className+"-list");
             this.container.appendChild(list);

@@ -4,16 +4,20 @@ window.onload = function(e)
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v9', //sattelite-v9
-        attributionControl: false
+        attributionControl: false, 
+        zoom: 2
     });
     map.addControl(new MapboxGeocoder({accessToken: mapboxgl.accessToken }), 'bottom-right');
-    
+
     map.on('load', function()
     {
         const layerControl = new LayerMenuCtrl();
         map.addControl(layerControl, "top-right");
-        layerControl.addLayer('Shoreline', shoreLineConfig);
         layerControl.addLayer('Glossis', glossisConfig);
+        layerControl.addLayer('Shoreline', shoreLineConfig);
+
+        var GlossisAnimation = new AnimateLayers(glossisConfig, map, 1); //layerArray, map, frames_per_second
+        GlossisAnimation.start();
 
         var modes = MapboxDraw.modes;
         modes.draw_rectangle = DrawRectangle.default;
@@ -34,36 +38,105 @@ window.onload = function(e)
 
         const drawRectangleControl = new DrawRectangleCtrl(draw);
         map.addControl(drawRectangleControl, 'bottom-right');
-        
+
         map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     });
-    
+
     const loginControl = new LoginCtrl();
     map.addControl(loginControl, 'top-right');
-    
+
     var menuElem = document.getElementById("menu-left");
     const hamburgerMenuControl = new ToggleElementButtonCtrl(menuElem, "hamburger-menu-toggle");
     map.addControl(hamburgerMenuControl, 'top-left');
-    document.getElementById("icon-menu-close").addEventListener("click", function(e) 
+    document.getElementById("icon-menu-close").addEventListener("click", function(e)
     {
         menuElem.classList.remove('visible');
     });
-    
+
     AddMouseMoveFadeEvent(document.getElementsByClassName("mapboxgl-control-container")[0]);
 }
+
+function AnimateLayers(layers, map, fps) {
+
+    fps = (fps != undefined) ? fps: 20;
+    var activeFrame = 0;
+    var lastFrame = 0;
+    var animation;
+
+    this.start = function()
+    {
+        animation = setInterval(frame, 1000 / fps);
+        function frame() {
+            activeFrame++;
+            if (activeFrame > layers.length -1)
+            {
+                activeFrame = 0;
+            }
+            map.setPaintProperty(layers[lastFrame].id, 'raster-opacity', 0);
+            map.setPaintProperty(layers[activeFrame].id, 'raster-opacity', 1);
+            //fadeOut(layers[lastFrame].id);  ///too heavy on the browser
+            //fadeIn(layers[activeFrame].id);
+
+            lastFrame = activeFrame;
+        }
+    }
+
+    this.stop = function()
+    {
+        clearInterval(animation);
+    }
+
+    function fadeIn(layerId)
+    {
+        //get opacity
+        var opacity = map.getLayer(layerId).paint.get("raster-opacity");
+
+        var fade = setInterval(fadeInFunc, 100);
+        function fadeInFunc () {
+            opacity+= 0.1;
+            if (opacity > 0.99)
+            {
+                opacity = 1;
+                clearInterval(fade);
+            }
+            map.setPaintProperty(layerId, 'raster-opacity', opacity);
+        }
+    }
+
+    function fadeOut(layerId)
+    {
+        //get opacity
+        var opacity = map.getLayer(layerId).paint.get("raster-opacity");
+
+        var fade = setInterval(fadeOutFunc, 100);
+        function fadeOutFunc () {
+            opacity -= 0.1;
+            if(opacity < 0.01)
+            {
+                opacity = 0;
+                clearInterval(fade);
+            }
+            map.setPaintProperty(layerId, 'raster-opacity', opacity);
+        }
+
+    }
+
+}
+
+
 
 //add fadein on mousemove
 function AddMouseMoveFadeEvent(elementToFade)
 {
     var mouseTimer;
-    document.body.addEventListener("mousemove", function() 
+    document.body.addEventListener("mousemove", function()
     {
             clearTimeout(mouseTimer);
             elementToFade.classList.add("visible");
-           
-            mouseTimer = setTimeout( function() 
+
+            mouseTimer = setTimeout( function()
             {
-               elementToFade.classList.remove("visible"); 
+               elementToFade.classList.remove("visible");
             }, 5000);
     });
 }

@@ -167,11 +167,11 @@ const shoreLineConfig = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://gerbenha.062slfsd"
+      url: "mapbox://gerbenha.6z18bebw"
     },
     "minzoom": 4,
     "maxzoom": 9,
-    "source-layer": "Aggregatedpointsz5-bwuc0m",
+    "source-layer": "Aggregatedpointsz5-bsf5g2",
     paint: {
       "circle-radius": [
         "interpolate",
@@ -191,11 +191,11 @@ const shoreLineConfig = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://gerbenha.062slfsd"
+      url: "mapbox://gerbenha.6z18bebw"
     },
     "minzoom": 4,
     "maxzoom": 9,
-    "source-layer": "Aggregatedpointsz5-bwuc0m",
+    "source-layer": "Aggregatedpointsz5-bsf5g2",
     paint: {
       "circle-radius" : [
         "interpolate",
@@ -236,11 +236,11 @@ const shoreLineConfig = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://gerbenha.bkxj8nc1"
+      url: "mapbox://gerbenha.0palcbmn"
     },
     "minzoom": 0,
     "maxzoom": 4,
-    "source-layer": "Aggregatedpointsz0-7r6kje",
+    "source-layer": "Aggregatedpointsz0-0vqo71",
     paint: {
       "circle-radius": [
         "interpolate",
@@ -260,11 +260,11 @@ const shoreLineConfig = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://gerbenha.bkxj8nc1"
+      url: "mapbox://gerbenha.0palcbmn"
     },
     "minzoom": 0,
     "maxzoom": 4,
-    "source-layer": "Aggregatedpointsz0-7r6kje",
+    "source-layer": "Aggregatedpointsz0-0vqo71",
     paint: {
       "circle-radius" : [
         "interpolate",
@@ -308,18 +308,18 @@ const glossisConfig = [
         type: "raster",
         source: {
           type: "raster",
-          url: "mapbox://gerbenha.1skx6j5a"
+          url: "mapbox://gerbenha.47ka8d9y"
         },
-        "source-layer": "DflowFM_gtsm_wl_timestep_0_20-89eweh",
+        "source-layer": "DflowFM_gtsm_wl_timestep_0_20-0qgke6",
     },
      {
         id: "glossis-time01",
         type: "raster",
         source: {
           type: "raster",
-          url: "mapbox://gerbenha.be8uw9h2"
+          url: "mapbox://gerbenha.8aq9bpwv"
         },
-        "source-layer": "DflowFM_gtsm_wl_timestep_1_20-doemuo",
+        "source-layer": "DflowFM_gtsm_wl_timestep_2_20-5q63i7",
     },
      {
         id: "glossis-time02",
@@ -374,77 +374,5 @@ const glossisConfig = [
           url: "mapbox://gerbenha.6r4prsoy"
         },
         "source-layer": "DflowFM_gtsm_wl_timestep_7_20-7k4c9y",
-    },
-	{
-        id: "glossis-time08",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.au7iw93w"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_8_20-6gcwkt",
-    },
-	{
-        id: "glossis-time09",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.78ccnxbb"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_9_20-cpz51q",
-    },
-	{
-        id: "glossis-time10",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.artklv18"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_10_2-8k5bts",
-    },
-	{
-        id: "glossis-time11",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.ar18e14w"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_11_2-12uy4s",
-    },
-	{
-        id: "glossis-time12",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.4m3556ag"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_12_2-82os0q",
-    },
-	{
-        id: "glossis-time13",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.3awr4h9v"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_13_2-5jtffo",
-    },
-	{
-        id: "glossis-time14",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.d3pqg4v0"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_14_2-axcapt",
-    },
-	{
-        id: "glossis-time15",
-        type: "raster",
-        source: {
-          type: "raster",
-          url: "mapbox://gerbenha.8fuv5wbi"
-        },
-        "source-layer": "DflowFM_gtsm_wl_timestep_15_2-1v9xxl",
     }
 ]
